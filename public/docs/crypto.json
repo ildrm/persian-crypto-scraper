@@ -1,0 +1,384 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Crypto",
+    "description": "Crypt fetches prices.",
+    "contact": {
+      "email": "ildrm@hotmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "list-coins",
+      "description": "List the coins"
+    },
+    {
+      "name": "list-markets",
+      "description": "List the markets"
+    },
+    {
+      "name": "get-coin-name",
+      "description": "Get the coin's name"
+    },
+    {
+      "name": "get-coin-symbol",
+      "description": "Get the coin's symbol"
+    },
+    {
+      "name": "market-list",
+      "description": "Get all coins in all markets"
+    },
+    {
+      "name": "market-list-symbol",
+      "description": "List the symbol(s) in all markets"
+    },
+    {
+      "name": "market-list-sorted-symbol",
+      "description": "List the symbol(s) in all markets"
+    },
+    {
+      "name": "crypto-by-market",
+      "description": "List symbol(s) in a market"
+    },
+    {
+      "name": "analyse-symbol",
+      "description": "Analyse the symbol"
+    }
+  ],
+  "paths": {
+    "/list/coins": {
+      "get": {
+        "tags": [
+          "list-coins"
+        ],
+        "summary": "List all of the coins",
+        "operationId": "list_coins",
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/list/coins": {
+                    "value": "{\"coins\":{\"BCH\":\"Bitcoin Cash\",\"BTG\":\"Bitgem\",\"BCC\":\"BitConnect\",\"BTS\":\"BitShares\",\"BCN\":\"Bytecoin\",\"DASH\":\"Dash\",\"DOGE\":\"Dogecoin\",\"ETH\":\"Ethereum\"}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/list/markets": {
+      "get": {
+        "tags": [
+          "list-markets"
+        ],
+        "summary": "List all of the markets",
+        "operationId": "list_markets",
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/list/markets": {
+                    "value": "{\"markets\":[\"nobitex\",\"ramzinex\",\"abantether\",\"wallex\",\"donyacoin\",\"arzfi\",\"exnovin\",\"irpm\",\"ubitex\",\"arzicoin\",\"bitgrand\",\"arzinja\",\"adabex\",\"arzif\",\"pay98\",\"ariomex\",\"arkaex\"]}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/coin-name/{symbol}": {
+      "get": {
+        "tags": [
+          "get-coin-name"
+        ],
+        "summary": "Get a coin by it's symbol",
+        "operationId": "get_coin_name",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/get/coin-name/btc": {
+                    "value": "{\"coin\":\"Bitcoin\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get/coin-symbol/{name}": {
+      "get": {
+        "tags": [
+          "get-coin-symbol"
+        ],
+        "summary": "Get a coin by it's name",
+        "operationId": "get_coin_symbol",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/get/coin-name/btc": {
+                    "value": "{\"coin\":\"BTC\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/market/list": {
+      "get": {
+        "tags": [
+          "market-list"
+        ],
+        "summary": "Get all coins in all markets",
+        "operationId": "market_list",
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/market/list": {
+                    "value": "{\"data\": {\"nobitex\": {\"btc\": { \"sell\": 6729994560, \"buy\": 6700902100 },\"eth\": { \"sell\": 401500000, \"buy\": 401304000 },\"etc\": { \"sell\": 4839990, \"buy\": 4815110 },\"usdt\": { \"sell\": 321600, \"buy\": 321210 }},\"ramzinex\": {\"btc\": { \"buy\": 2011.1, \"sell\": 2099.9 },\"usdt\": { \"buy\": 32265, \"sell\": 32300 },\"100shib\": { \"buy\": 34.9, \"sell\": 35.3 },\"doge\": { \"buy\": 2034, \"sell\": 2042.4 },\"sol\": { \"buy\": 3.7990000000000004, \"sell\": 3.7990000000000004 }}}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/market/list/{symbol}": {
+      "get": {
+        "tags": [
+          "market-list-symbol"
+        ],
+        "summary": "List the symbol(s) in all markets",
+        "operationId": "market_list_symbol",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/market/list/usdt": {
+                    "value": "{\"data\":{\"nobitex\":{\"sell\":32129,\"buy\":32106},\"ramzinex\":{\"buy\":32200.2,\"sell\":32299.5}}}"
+                  },
+                  "/market/list/usdt,btc": {
+                    "value": "{\"data\":{\"nobitex\":{\"usdt\":{\"sell\":321290,\"buy\":321250},\"btc\":{\"sell\":6709995980,\"buy\":6696246030}},\"ramzinex\":{\"usdt\":{\"buy\":32200,\"sell\":32233.7},\"btc\":{\"buy\":2011.1,\"sell\":2099.9}}}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/market/list/{symbol}/{sort}/{order}": {
+      "get": {
+        "tags": [
+          "market-list-sorted-symbol"
+        ],
+        "summary": "List the sorted symbol(s) in all markets",
+        "operationId": "market_list_sorted_symbol",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sell",
+                "buy"
+              ]
+            }
+          },
+          {
+            "name": "order",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "desc",
+                "asc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/market/list/usdt/buy/desc": {
+                    "value": "{\"data\": {\"pay98\": {\"buy\": 33700,\"sell\": 33700},\"irpm\": {\"buy\": 32400,\"sell\": 31400},\"arzicoin\": {\"buy\": 32386,\"sell\": 31886},\"donyacoin\": {\"buy\": 32372,\"sell\": 31704},\"ariomex\": {\"buy\": 32362,\"sell\": 32362}}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/market/{market}/{symbol}": {
+      "get": {
+        "tags": [
+          "crypto-by-market"
+        ],
+        "summary": "List symbol(s) in a market",
+        "operationId": "crypto_by_market",
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/market/list/usdt": {
+                    "value": "{\"data\":{\"sell\":\"322990\",\"buy\":\"322610\"}}"
+                  },
+                  "/market/nobitex/usdt,btc": {
+                    "value": "{\"data\":{\"usdt\":{\"sell\":321430,\"buy\":321280},\"btc\":{\"sell\":6719906600,\"buy\":6695112300}}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analyse/{symbol}": {
+      "get": {
+        "tags": [
+          "analyse-symbol"
+        ],
+        "summary": "Analyse the symbol",
+        "operationId": "analyse_symbol",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success with data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "/analyse/usdt": {
+                    "value": "{\"data\":{\"sell\":{\"SVR\":31971,\"LeastSquares\":31971},\"buy\":{\"SVR\":31914,\"LeastSquares\":31913}}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}
