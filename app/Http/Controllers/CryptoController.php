@@ -37,7 +37,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function nobitex($sign=null) {
+    public function nobitex($sign=null) {
         try {
             if (empty($sign)) {
                 $coins = 'btc,eth,etc,usdt,ada,bch,ltc,bnb,eos,xlm,xrp,trx,doge,uni,link,dai,dot,shib,aave,ftm,matic,axs,mana,sand,avax,pmn';
@@ -88,7 +88,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function ramzinex($sign=null) {
+    public function ramzinex($sign=null) {
         try {
             $url = "https://publicapi.ramzinex.com/exchange/api/v1.0/exchange/pairs";
 
@@ -139,7 +139,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function abantether($sign=null) {
+    public function abantether($sign=null) {
         try {
             $client = new WebSocketClient('wss://abantether.com/wss/ws/priceticker/', new ClientConfig());
             $client->send('');
@@ -182,7 +182,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function wallex($sign=null) {
+    public function wallex($sign=null) {
         try {
             $url = "https://api.wallex.ir/v1/markets";
 
@@ -237,7 +237,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function donyacoin($sign=null) {
+    public function donyacoin($sign=null) {
         try {
             $url = "https://panel.donyacoin.com/-/publish/v1/currency";
 
@@ -292,7 +292,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function arzfi($sign=null) {
+    public function arzfi($sign=null) {
         try {
             $url = "https://arzfi.com/devapi/v1/market/assets";
 
@@ -343,7 +343,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function exnovin($sign=null) {
+    public function exnovin($sign=null) {
         try {
             $url = "https://admin.exnovin.io/api/markets?quote=TMN&page=1&per_page=100";
 
@@ -394,7 +394,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function irpm($sign=null) {
+    public function irpm($sign=null) {
         try {
             $url = "https://irpm.me/api/coins/100/pg:1";
 
@@ -446,7 +446,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function arzicoin($sign=null) {
+    public function arzicoin($sign=null) {
         try {
             $dom = new Dom;
             $dom->loadFromUrl('https://arzicoin.com');
@@ -493,7 +493,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function bitgrand($sign=null) {
+    public function bitgrand($sign=null) {
         try {
             $client = new \GuzzleHttp\Client();
             $src = file_get_contents('https://bitgrand.ir/');
@@ -633,7 +633,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|string[]|void
      */
-    function arzinja($sign=null) {
+    public function arzinja($sign=null) {
         try {
             $url = "https://arzinja.app/stream/prices";
 
@@ -697,7 +697,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function adabex($sign=null) {
+    public function adabex($sign=null) {
         try {
             if (substr_count($sign,',')>0 or empty($sign)) {
                 $search = '';
@@ -758,7 +758,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function arzif($sign=null) {
+    public function arzif($sign=null) {
         try {
             $dom = new Dom;
             $dom->loadFromUrl("https://arzif.com/coins?market=IRT");
@@ -806,7 +806,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function pay98($sign=null) {
+    public function pay98($sign=null) {
         try {
             $dom = new Dom;
             $dom->loadFromUrl("https://pay98.app/%D9%82%DB%8C%D9%85%D8%AA-%D8%A7%D8%B1%D8%B2%D9%87%D8%A7%DB%8C-%D8%AF%DB%8C%D8%AC%DB%8C%D8%AA%D8%A7%D9%84");
@@ -854,7 +854,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function ariomex($sign=null) {
+    public function ariomex($sign=null) {
         try {
             $url = "https://ariomex.com/home_page/get_home_page_data";
 
@@ -903,7 +903,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return array|void
      */
-    function arkaex($sign=null) {
+    public function arkaex($sign=null) {
         try {
             $url = "https://arkaex.com/index.php?option=com_currencies&format=json&task=configs";
             $config = new \GuzzleHttp\Client();
@@ -980,7 +980,7 @@ class CryptoController extends Controller
      * @param $by_name
      * @return string|string[]|void
      */
-    function getCoins($search=null,$by_name=false) {
+    public function getCoins($search=null,$by_name=false) {
         $search = strtoupper($search);
         $ct = [
             'BCH'=>'Bitcoin Cash',
@@ -2372,7 +2372,7 @@ class CryptoController extends Controller
     /**
      * @return string[]
      */
-    function getMarkets() {
+    public function getMarkets() {
         $mt = [
             'nobitex',
             'ramzinex',
@@ -2399,7 +2399,7 @@ class CryptoController extends Controller
      * @param $sign
      * @return mixed
      */
-    function getPrice($market, $sign) {
+    public function getPrice($market, $sign) {
         return call_user_func_array(array($this, "$market"), [$sign]);
     }
 
@@ -2409,7 +2409,7 @@ class CryptoController extends Controller
      * @param $sort_order
      * @return array[]
      */
-    function getAllPrices($sign,$sort=null,$sort_order=null) {
+    public function getAllPrices($sign,$sort=null,$sort_order=null) {
         $ret = [];
         foreach ($this->getMarkets() as $market) {
             $result = $this->$market($sign);
@@ -2436,7 +2436,7 @@ class CryptoController extends Controller
      * @param $price_avg
      * @return array
      */
-    function priceFilter($prices, $price_avg) {
+    public function priceFilter($prices, $price_avg) {
         $new_price = [];
         $min_price = min($prices);
         $max_price = max($prices);
@@ -2461,7 +2461,7 @@ class CryptoController extends Controller
      * @param $new_price
      * @return array|false
      */
-    function predictPrice($new_price) {
+    public function predictPrice($new_price) {
         $ret = [];
         if (count($new_price['differences']) == count($new_price['prices'])) {
             $regression1 = new SVR(Kernel::LINEAR);
@@ -2477,7 +2477,7 @@ class CryptoController extends Controller
         }
     }
 
-    function analyse($sign) {
+    public function analyse($sign) {
         $markets = $this->getAllPrices($sign);
         $prices = [];
         $kf = new KalmanFilter();
